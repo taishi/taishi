@@ -90,6 +90,7 @@ namespace ConsoleApplication1
             p = Console.ReadLine();
             if (int.TryParse(p, out i))
             {
+                int max = 0;
                 int [] mass = new int [i];
                 Random rnd = new Random();
                 Console.WriteLine();
@@ -97,11 +98,14 @@ namespace ConsoleApplication1
                 {
                     mass[j] = rnd.Next(0, 99);
                     Console.Write(mass[j] + "    ");
+                    if (max < mass[j])
+                        max = mass[j];
+                    
                 }
                 Math math = new Math();
                 math.Sort1(mass);
 
-                Console.WriteLine();
+                Console.WriteLine(mass);
                 Console.WriteLine();
 
                 for (int j = 0; j < i; j++)
@@ -109,6 +113,12 @@ namespace ConsoleApplication1
                     Console.Write(mass[j] + "    ");
                 }
                 Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+
+                math.Sort2(mass,max);
+                Console.ReadLine();
+
             }
         }
     }
@@ -118,6 +128,29 @@ namespace ConsoleApplication1
         {
             Array.Sort(g);
         }
+        public void Sort2(int[] g, int maximum)
+        {
+            int k = g.Length-1;
+            int[] gg = new int[g.Length];
+            
+            gg [g.Length-1] = maximum;
+            
+            for (int j = 0; j < g.Length - 1; j++)
+            {
+                for (int i = 0; i < g.Length; i++)
+                {
+                    if (g[i] > gg[k - 1] & g[i] < gg[k]) { gg[k - 1] = g[i]; }
+                }
+                k--;
+            }
+            Console.WriteLine();
+                for (int i = 0; i < g.Length; i++)
+                {
+                    Console.Write(gg[i] + "    ");
+                }
+            
+        }
+        
     }
    
 }
