@@ -7,21 +7,14 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        // 1) Пользователь вводит число от 5 до 10
-        // 2) Создает равномерный двумерный массив с соответствующей шириной и высотой
-        // 3) В каждая ячека помещаем случайное число от 0 до 99
-        // 4) 
-
-        // |9|8|7|
-        // |1|2|3|
-        // |4|5|6|
-
-        // |8|7|9|
-        // |2|3|1|
-        // |5|6|4|
+        
         static void Main(string[] args)
         {
-            int g=0;
+            Test2();
+        }
+        static void Test1()
+        {
+            int g = 0;
             string k;
             do
             {
@@ -44,7 +37,7 @@ namespace ConsoleApplication1
                     Console.WriteLine("\aВы ввели некорректное число! \nПопробуйте еще раз.");
                     goto loop;
                 }
-                int [,] mas = new int [g,g];
+                int[,] mas = new int[g, g];
                 if (g > 4 & g < 11)
                 {
                     Random rnd = new Random();
@@ -57,28 +50,28 @@ namespace ConsoleApplication1
                     {
                         for (int j = 0; j < g; j++)
                             Console.Write(mas[i, j] + "  ");
-                    Console.WriteLine();
+                        Console.WriteLine();
                     }
-                int[,] mas2 = new int[g, g];
+                    int[,] mas2 = new int[g, g];
 
-                for (int i = 0; i < g; i++)
-                {
-                    for (int j = 0; j < g; j++)
+                    for (int i = 0; i < g; i++)
                     {
-                     if (j < (g-1))
-                        mas2[i, j] = mas[i, (j+1)];
-                     else
-                        mas2[i, j] = mas[i, 0];
+                        for (int j = 0; j < g; j++)
+                        {
+                            if (j < (g - 1))
+                                mas2[i, j] = mas[i, (j + 1)];
+                            else
+                                mas2[i, j] = mas[i, 0];
+                        }
+                        Console.WriteLine();
                     }
-                    Console.WriteLine();
-                }
 
-                for (int i = 0; i < g; i++)
-                {
-                    for (int j = 0; j < g; j++)
-                        Console.Write(mas2[i, j] + "  ");
-                    Console.WriteLine();
-                }
+                    for (int i = 0; i < g; i++)
+                    {
+                        for (int j = 0; j < g; j++)
+                            Console.Write(mas2[i, j] + "  ");
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
@@ -87,8 +80,44 @@ namespace ConsoleApplication1
                 }
             }
             while (true);
-        }
 
+        }
+        static void Test2()
+        {
+            int i;
+            string p;
+            Console.Write("Введите число: ");
+            p = Console.ReadLine();
+            if (int.TryParse(p, out i))
+            {
+                int [] mass = new int [i];
+                Random rnd = new Random();
+                Console.WriteLine();
+                for (int j = 0; j < i; j++)
+                {
+                    mass[j] = rnd.Next(0, 99);
+                    Console.Write(mass[j] + "    ");
+                }
+                Math math = new Math();
+                math.Sort1(mass);
+
+                Console.WriteLine();
+                Console.WriteLine();
+
+                for (int j = 0; j < i; j++)
+                {
+                    Console.Write(mass[j] + "    ");
+                }
+                Console.ReadLine();
+            }
+        }
+    }
+    class Math
+    {
+        public void Sort1(int[] g)
+        {
+            Array.Sort(g);
+        }
     }
    
 }
