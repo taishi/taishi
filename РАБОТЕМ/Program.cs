@@ -81,22 +81,36 @@ namespace ConsoleApplication1
             public void Sort(int[,] mm, int gg)
             {
                 bool Uslovie = true;
+                int[] Pomosh2 = new int[gg];
+                int f = 0;
+                Console.WriteLine();
+                for (int i = 0; i < gg; i++)
+                {
+                    Pomosh2[i] = mm[i, i];
+                    Console.Write(Pomosh2[i] + "      ");
+                }
+
                 while (Uslovie)
                 {
                     Uslovie = false;
                     int[] Pomosh = new int[gg];
                     for (int i = 0; i < gg - 1; i++)
-                        for (int j = 0; j < gg - 1; j++)
-                            if (mm[i, j] > mm[i + 1, j + 1])
+                    {
+                        if (Pomosh2[i] > Pomosh2[i + 1])
+                        {
+                            f = Pomosh2[i];
+                            Pomosh2[i] = Pomosh2[i + 1];
+                            Pomosh2[i + 1] = f;
+                            for (int h = 0; h < gg; h++)
                             {
-                                for (int h = 0; h < gg; h++)
-                                {
-                                    Pomosh[h] = mm[h, j];
-                                    mm[h, j] = mm[h, j + 1];
-                                    mm[h, j + 1] = Pomosh[h];
-                                    Uslovie = true;
-                                }
+                                Pomosh[h] = mm[h, i];
+                                mm[h, i] = mm[h, i + 1];
+                                mm[h, i + 1] = Pomosh[h];
+
                             }
+                            Uslovie = true;
+                        }
+                    }
                 }
                 Console.WriteLine();
                 Console.WriteLine();
